@@ -10,9 +10,8 @@ class Translate(View):
     def get(self, request):
         translator = Translator()
 
-        try:
-            source_language = request.GET["sl"]
-        except Exception:
+        source_language = request.GET.get("sl")
+        if not source_language:  # Handle empty string or None
             source_language = None
 
         try:

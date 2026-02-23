@@ -200,3 +200,8 @@ pip-selfcheck.json
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/flask,virtualenv,visualstudiocode
+
+API_DOCS.md
+PROJECT_EXPLAINED.md
+DEPLOY.md
+SETUP.md

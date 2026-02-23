@@ -1,251 +1,504 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Translate API</title>
-    <!-- Bootstrap 5.2 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
-      crossorigin="anonymous"
-    />
-    <!-- Highlight.js 11.6.0 -->
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css"
-    />
-  </head>
 
-  <body>
-    <div class="container">
-      <nav class="navbar navbar-expand-lg">
-        <h1 class="me-3">Free Translate API</h1>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premium Translate - Free API</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #4F46E5;
+      --primary-hover: #4338CA;
+      --bg: #F9FAFB;
+      --card-bg: #FFFFFF;
+      --text-main: #111827;
+      --text-muted: #6B7280;
+      --border: #E5E7EB;
+    }
 
-        <a
-          href="https://github.com/cuberkam/free_translate_api"
-          type="button"
-          class="btn btn-dark mb-2"
-          target="_blank"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-github mb-1"
-            viewBox="0 0 16 16"
-          >
-            <path
-              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"
-            ></path>
-          </svg>
-          GitHub
-        </a>
-      </nav>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-      <div class="container">
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+      width: 100%;
+    }
 
-        <div class="card border-warning mb-3" style="max-width: 600px">
-          <div class="card-body">
-            <div class="d-flex align-items-start gap-3">
-              <div>
-                <h5 class="card-title mb-1">⚠️ Important Notice</h5>
-                <p class="card-text mb-0 text-muted">
-                  The website hosted on PythonAnywhere is for demonstration purposes only. This is not a public API service and does not support external API hosting. </br> If you want to use this project as an API, please clone the repository and host it on your own server or cloud platform.
-                </p>
-              </div>
-            </div>
-          </div>
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .translator-card {
+      background: var(--card-bg);
+      border-radius: 1.5rem;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      padding: 2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      position: relative;
+      overflow: visible;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .translator-card {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pane {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .pane-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    select {
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      font-weight: 500;
+      outline: none;
+      transition: border-color 0.2s;
+      cursor: pointer;
+      background-color: white;
+      font-family: inherit;
+    }
+
+    select:focus {
+      border-color: var(--primary);
+    }
+
+    textarea {
+      width: 100%;
+      height: 200px;
+      padding: 1rem;
+      border-radius: 1rem;
+      border: 1px solid var(--border);
+      resize: none;
+      font-size: 1.1rem;
+      outline: none;
+      transition: all 0.2s;
+      background: #F3F4F6;
+      font-family: inherit;
+      box-sizing: border-box;
+    }
+
+    textarea:focus {
+      background: #FFFFFF;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .output-pane textarea {
+      background: #F9FAFB;
+      cursor: default;
+    }
+
+    .translate-btn {
+      grid-column: span 2;
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 1rem;
+      border-radius: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      .translate-btn {
+        grid-column: span 1;
+      }
+    }
+
+    .translate-btn:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    }
+
+    .translate-btn:active {
+      transform: translateY(0);
+    }
+
+    .translate-btn:disabled {
+      background: var(--text-muted);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .swap-btn {
+      position: absolute;
+      left: 50%;
+      top: calc(50% - 2rem);
+      transform: translate(-50%, -50%);
+      background: white;
+      border: 1px solid var(--border);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.2s;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+      .swap-btn {
+        display: none;
+      }
+    }
+
+    .swap-btn:hover {
+      background: var(--primary);
+      color: white;
+      transform: translate(-50%, -50%) rotate(180deg);
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.2s;
+      padding: 0.5rem;
+    }
+
+    .copy-btn:hover {
+      color: var(--primary);
+    }
+
+    .loader {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255, 255, 255, .3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .status-msg {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      min-height: 1.5rem;
+    }
+
+    .success {
+      color: #10B981;
+    }
+
+    .error {
+      color: #EF4444;
+    }
+
+    footer {
+      margin-top: auto;
+      text-align: center;
+      padding: 2rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .docs-section {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .docs-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      transition: opacity 0.2s;
+      margin-bottom: 1rem;
+    }
+
+    .docs-link:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    /* Subtle scrollbar */
+    textarea::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    textarea::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    textarea::-webkit-scrollbar-thumb {
+      background: #D1D5DB;
+      border-radius: 20px;
+    }
+
+    textarea::-webkit-scrollbar-thumb:hover {
+      background: #9CA3AF;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <h1>Free Translate</h1>
+      <p class="subtitle">Experience fast, accurate, and completely free translations.</p>
+    </header>
+
+    <div class="translator-card">
+      <div class="pane input-pane">
+        <div class="pane-header">
+          <select id="srcLang">
+            <option value="auto">Detect Language</option>
+          </select>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Source</span>
         </div>
+        <textarea id="srcText" placeholder="Enter text to translate..." spellcheck="false"></textarea>
       </div>
 
-      <p>
-        With the Free Translate API, you can translate words or sentences into
-        the language you want. There are 2 ways to do this.
-      </p>
+      <button class="swap-btn" id="swapBtn" title="Swap languages">
+        <i class="fas fa-exchange-alt"></i>
+      </button>
 
-      <strong> <mark>URL Parameters</mark> </strong>
-      <ul>
-        <li>sl = Source language code</li>
-        <li>dl = Destination language code</li>
-        <li>text = word or sentence</li>
-      </ul>
+      <div class="pane output-pane">
+        <div class="pane-header">
+          <select id="destLang">
+            <!-- Languages will be loaded here -->
+          </select>
+          <button class="copy-btn" id="copyBtn" title="Copy translation">
+            <i class="far fa-copy"></i>
+          </button>
+        </div>
+        <textarea id="destText" placeholder="Translation will appear here..." readonly spellcheck="false"></textarea>
+      </div>
 
-      <strong><mark>First Way:</mark></strong> By querying with sl, dl and text
-      parameters. <br />
-      <br />
-      <strong><mark>Second Way:</mark></strong> By querying with dl and text
-      parameters. The language of the text parameter is automatically detected.
-      <br />
-      <br />
-
-      <blockquote class="p-2 bg-info bg-opacity-25" style="display: unset">
-        Use the <code>/languages</code> endpoint to see which languages are
-        supported.
-      </blockquote>
-
-      <br />
-      <br />
-      <hr />
-      Endpoint:
-      <pre><code> /translate?sl=en&dl=tr&text=example  OR  /translate?dl=tr&text=example</code></pre>
-      Response:
-      <pre><code class="language-json">
-      {
-        "source-language": "en",
-        "source-text": "example\n",
-        "destination-language": "tr",
-        "destination-text": "örnek",
-        "pronunciation": {
-          "source-text-phonetic": "iɡˈzampəl",
-          "source-text-audio": "https://translate.google.com/translate_tts?ie=UTF-&&client=tw-ob&tl=en&q=example\n",
-          "destination-text-audio": "https://translate.google.com/translate_tts?ie=UTF-&&client=tw-ob&tl=tr&q=örnek"
-        },
-        "translations": {
-          "all-translations": [
-            [
-              "örnek",
-              [
-                "example",
-                "sample",
-                "instance",
-                "model",
-                "specimen",
-                "pattern"
-              ]
-            ],
-            [
-              "misal",
-              [
-                "example",
-                "instance"
-              ]
-            ],
-            [
-              "ibret",
-              [
-                "lesson",
-                "example",
-                "warning",
-                "object lesson",
-                "one in the eye"
-              ]
-            ],
-            [
-              "ders",
-              [
-                "lesson",
-                "class",
-                "lecture",
-                "teaching",
-                "subject",
-                "example"
-              ]
-            ]
-          ],
-          "possible-translations": [
-            "örnek",
-            "örnek vermek",
-            "misal",
-            "mesela",
-            "örneğin"
-          ],
-          "possible-mistakes": null
-        },
-        "definitions": [
-          {
-            "part-of-speech": "isim",
-            "definition": "a thing characteristic of its kind or illustrating a general rule.",
-            "example": "it's a good example of how European action can produce results",
-            "other-examples": [
-              "it's a good <b>example</b> of how European action can produce results"
-            ],
-            "synonyms": {
-              "": [
-                "specimen",
-                "sample",
-                "exemplar",
-                "exemplification",
-                "instance",
-                "case",
-                "representative case",
-                "typical case",
-                "case in point",
-                "illustration"
-              ]
-            }
-          },
-          {
-            "part-of-speech": "isim",
-            "definition": "a person or thing regarded in terms of their fitness to be imitated or the likelihood of their being imitated.",
-            "example": "it is vitally important that parents should set an example",
-            "other-examples": [
-              "it is vitally important that parents should set an <b>example</b>",
-              "she followed her brother's <b>example</b> and deserted her family"
-            ],
-            "synonyms": {
-              "": [
-                "precedent",
-                "lead",
-                "guide",
-                "model",
-                "pattern",
-                "blueprint",
-                "template",
-                "paradigm",
-                "exemplar",
-                "ideal",
-                "standard",
-                "parallel case",
-                "role model"
-              ]
-            }
-          },
-          {
-            "part-of-speech": "fiil",
-            "definition": "be illustrated or exemplified.",
-            "example": "the extent of Allied naval support is exampled by the navigational specialists provided",
-            "other-examples": null,
-            "synonyms": null
-          }
-        ],
-        "see-also": null
-      }
-    </code></pre>
-      <hr />
-      Endpoint:
-      <pre><code> /translate?sl=en&dl=tr&text=hello%20world  OR  /translate?dl=tr&text=hello%20world</code></pre>
-      Response:
-      <pre><code class="language-json">
-      {
-        "source-language": "en",
-        "source-text": "hello world",
-        "destination-language": "tr",
-        "destination-text": "Selam Dünya",
-        "pronunciation": {
-          "source-text-phonetic": null,
-          "source-text-audio": "https://translate.google.com/translate_tts?ie=UTF-&&client=tw-ob&tl=en&q=hello%20world",
-          "destination-text-audio": "https://translate.google.com/translate_tts?ie=UTF-&&client=tw-ob&tl=tr&q=Selam%20Dünya"
-        },
-        "translations": {
-          "all-translations": null,
-          "possible-translations": [
-            "Selam Dünya",
-            "merhaba dünya"
-          ],
-          "possible-mistakes": null
-        },
-        "definitions": null,
-        "see-also": null
-      }
-    </code></pre>
+      <button class="translate-btn" id="translateBtn">
+        <span id="btnText">Translate Now</span>
+        <div class="loader" id="loader"></div>
+      </button>
     </div>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/highlight.min.js"></script>
-    <script>
-      hljs.highlightAll();
-    </script>
-  </body>
+
+    <div class="status-msg" id="statusMsg"></div>
+
+    <div class="docs-section">
+      <a href="https://github.com/cuberkam/free_translate_api" class="docs-link" target="_blank">
+        <i class="fab fa-github"></i> Developer API Documentation
+      </a>
+      <p style="color: var(--text-muted); font-size: 0.85rem;">
+        Integrate this translation engine into your own projects for free.
+      </p>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2024 Free Translate API • Premium Experience • No Costs
+  </footer>
+
+  <script>
+    const srcText = document.getElementById('srcText');
+    const destText = document.getElementById('destText');
+    const srcLang = document.getElementById('srcLang');
+    const destLang = document.getElementById('destLang');
+    const translateBtn = document.getElementById('translateBtn');
+    const btnText = document.getElementById('btnText');
+    const loader = document.getElementById('loader');
+    const statusMsg = document.getElementById('statusMsg');
+    const swapBtn = document.getElementById('swapBtn');
+    const copyBtn = document.getElementById('copyBtn');
+
+    // Load languages from API
+    async function loadLanguages() {
+      try {
+        const response = await fetch('/languages');
+        if (!response.ok) throw new Error('Could not load languages');
+        const data = await response.json();
+
+        // Sort languages by name
+        const sortedLangs = Object.entries(data).sort((a, b) => a[1].localeCompare(b[1]));
+
+        sortedLangs.forEach(([code, name]) => {
+          const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+          srcLang.add(new Option(displayName, code));
+          destLang.add(new Option(displayName, code));
+        });
+
+        // Set defaults
+        destLang.value = 'es'; // Spanish
+      } catch (error) {
+        console.error('Failed to load languages:', error);
+        statusMsg.textContent = 'Warning: Language list could not be loaded.';
+        statusMsg.className = 'status-msg error';
+      }
+    }
+
+    async function performTranslation() {
+      const text = srcText.value.trim();
+      if (!text) {
+        destText.value = '';
+        return;
+      }
+
+      // UI Feedback
+      translateBtn.disabled = true;
+      btnText.style.display = 'none';
+      loader.style.display = 'block';
+      statusMsg.textContent = 'Translating...';
+      statusMsg.className = 'status-msg';
+
+      try {
+        const sl = srcLang.value === 'auto' ? '' : srcLang.value;
+        const dl = destLang.value;
+        const url = `/translate?sl=${sl}&dl=${dl}&text=${encodeURIComponent(text)}`;
+
+        const response = await fetch(url);
+        if (!response.ok) throw new Error('Translation failed');
+
+        const data = await response.json();
+        destText.value = data['destination-text'];
+
+        statusMsg.textContent = 'Translated successfully!';
+        statusMsg.className = 'status-msg success';
+
+        // Auto-clear success message after 3 seconds
+        setTimeout(() => {
+          if (statusMsg.className === 'status-msg success') {
+            statusMsg.textContent = '';
+          }
+        }, 3000);
+
+      } catch (error) {
+        statusMsg.textContent = 'Error: ' + error.message;
+        statusMsg.className = 'status-msg error';
+      } finally {
+        translateBtn.disabled = false;
+        btnText.style.display = 'inline';
+        loader.style.display = 'none';
+      }
+    }
+
+    // Event Listeners
+    translateBtn.addEventListener('click', performTranslation);
+
+    swapBtn.addEventListener('click', () => {
+      const currentSrcLang = srcLang.value;
+      const currentDestLang = destLang.value;
+
+      if (currentSrcLang !== 'auto') {
+        srcLang.value = currentDestLang;
+        destLang.value = currentSrcLang;
+      }
+
+      const currentSrcText = srcText.value;
+      srcText.value = destText.value;
+      destText.value = currentSrcText;
+
+      if (srcText.value) performTranslation();
+    });
+
+    copyBtn.addEventListener('click', () => {
+      if (!destText.value) return;
+      navigator.clipboard.writeText(destText.value);
+      const icon = copyBtn.querySelector('i');
+      icon.className = 'fas fa-check';
+      icon.style.color = '#10B981';
+      setTimeout(() => {
+        icon.className = 'far fa-copy';
+        icon.style.color = '';
+      }, 2000);
+    });
+
+    // Use Ctrl+Enter to translate
+    srcText.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        performTranslation();
+      }
+    });
+
+    // Initialize
+    loadLanguages();
+  </script>
+</body>
+
 </html>
