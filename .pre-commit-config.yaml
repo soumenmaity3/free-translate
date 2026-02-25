@@ -14,3 +14,4 @@ repos:
         entry: sh -c "uv pip freeze > requirements.txt && git add requirements.txt"
         language: system
         types: [python]
+ 
